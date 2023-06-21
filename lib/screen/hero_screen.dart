@@ -1,9 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:food/components/hero_screen_components.dart';
 
-class HeroPage extends StatelessWidget {
-  const HeroPage({Key? key}) : super(key: key);
+import '../data/model/store.dart';
+import '../data/user_repository/store_repository.dart';
+
+class HeroScreen extends StatelessWidget {
+  List<Store> stores = StoreRepository().getStores();
+   HeroScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,54 +27,7 @@ class HeroPage extends StatelessWidget {
           elevation: 0,
         ),
         extendBodyBehindAppBar: true,
-        body: Column(
-          children: [
-            Hero(
-              tag: "food",
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey,
-                    ),
-                    width: double.infinity,
-                    height: 300,
-                    child: Image.network(
-                      'https://i.namu.wiki/i/i0_iT3IlMb11qmP0hPSoG1M9nQRb526ZXPqjMG5Eo-oiVf9y7iVpnOGNoi4fW4mKBZmVf_cv-q3-zD2lvSVZDA.webp',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    bottom: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '11 Mirrors Rooftop',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            '426 Amsterdam Ave, NY',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+        body: TopStoreImage(store: stores[1],),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
