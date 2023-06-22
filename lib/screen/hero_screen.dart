@@ -10,8 +10,8 @@ import '../data/model/store.dart';
 import '../data/user_repository/store_repository.dart';
 
 class HeroScreen extends StatelessWidget {
-  List<Store> stores = StoreRepository().getStores();
-  List<Menu> menus = MenuRepository().getMenu();
+  final List<Store> stores = StoreRepository().getStores();
+  final List<Menu> menus = MenuRepository().getMenu();
 
   HeroScreen({Key? key}) : super(key: key);
 
