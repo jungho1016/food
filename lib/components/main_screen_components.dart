@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food/data/model/store.dart';
 import 'package:food/screen/hero_screen.dart';
 
+import '../data/model/menu.dart';
 import '../data/model/user.dart';
 
 class UserProfile extends StatelessWidget {
@@ -86,6 +87,96 @@ class UserProfile extends StatelessWidget {
   }
 }
 
+class StoreList extends StatelessWidget {
+  final Store store;
+  const StoreList({Key? key, required this.store}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => (HeroScreen())),
+                );
+              },
+              child: Hero(
+                tag: store.id,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey,
+                  ),
+                  width: 100,
+                  height: 100,
+                  child: Image.network(
+                    store.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        store.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                          ),
+                          Text(store.scope.toString()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(Icons.maps_ugc),
+                      Text(store.address),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    children: [
+                      Text('${store.distance} · ${store.foodType}'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class FoodCategory extends StatelessWidget {
   const FoodCategory({Key? key}) : super(key: key);
 
@@ -158,41 +249,22 @@ class FoodCategory extends StatelessWidget {
   }
 }
 
-class StoreList extends StatelessWidget {
-  final Store store;
-  const StoreList({Key? key, required this.store}) : super(key: key);
+class MenuList extends StatelessWidget {
+  final Menu menu;
+  const MenuList({Key? key, required this.menu}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => (HeroScreen())),
-                );
-              },
-              child: Hero(
-                tag: store.id,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey,
-                  ),
-                  width: 100,
-                  height: 100,
-                  child: Image.network(
-                    store.imageUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+            child: CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(menu.imageUrl),
             ),
           ),
           Expanded(
@@ -204,19 +276,10 @@ class StoreList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        store.name,
+                        '${menu.price}\$',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.yellow,
-                          ),
-                          Text('4.4'),
-                        ],
                       ),
                     ],
                   ),
@@ -226,8 +289,12 @@ class StoreList extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.maps_ugc),
-                      Text(store.address),
+                      Text(
+                        menu.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -235,7 +302,7 @@ class StoreList extends StatelessWidget {
                   padding: const EdgeInsets.all(4.0),
                   child: Row(
                     children: [
-                      Text('${store.distance} · ${store.foodType}'),
+                      Text('${menu.weight}· ${menu.kacl} kcal'),
                     ],
                   ),
                 ),

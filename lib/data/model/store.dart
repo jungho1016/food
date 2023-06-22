@@ -9,6 +9,8 @@ class Store {
   String distance;
   String foodType;
   String imformation;
+  num price;
+  List<Menu> menu;
 
   Store({
     required this.id,
@@ -19,5 +21,7 @@ class Store {
     required this.foodType,
     required this.scope,
     required this.imformation,
+    required this.price,
+    required this.menu,
   });
 }
