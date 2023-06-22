@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:food/data/model/store.dart';
 
+import '../data/model/menu.dart';
+
 class TopStoreImage extends StatelessWidget {
   final Store store;
   const TopStoreImage({Key? key, required this.store}) : super(key: key);
@@ -195,6 +197,72 @@ class Category extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MenuList extends StatelessWidget {
+  final Menu menu;
+  const MenuList({Key? key, required this.menu}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(menu.imageUrl),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${menu.price}\$',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        menu.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    children: [
+                      Text('${menu.weight} · ${menu.kacl} kcal'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
