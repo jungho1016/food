@@ -63,9 +63,15 @@ class _MainScreenState extends State<MainScreen> {
                       trailing: Icon(Icons.cable_sharp),
                     ),
                   ),
-                  FoodCategory(),
-                  StoreList(
-                    store: stores[0],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FoodCategory(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: StoreList(
+                      store: stores[0],
+                    ),
                   ),
                   // StoreList(
                   //   store: stores[1],
